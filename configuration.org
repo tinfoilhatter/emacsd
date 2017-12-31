@@ -15,12 +15,40 @@
 (require 'bind-key)
 #+END_SRC
 
+** Use an org file to organise RSS feeds
+#+BEGIN_SRC emacs-lisp
+(use-package elfeed-org
+  :ensure t
+  :config
+  (elfeed-org)
+  (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org")))
+;;  (setq rmh-elfeed-org-auto-ignore-invalid-feeds t))
+
+(use-package elfeed-web
+  :ensure t
+  :config
+  (elfeed-web-start))
+#+END_SRC
+
 * Miscellaneous
+
+** Open some useful buffers
+
+#+BEGIN_SRC emacs-lisp
+(eshell)
+(ansi-term "/bin/bash")
+(find-file "~/.emacs.d/init.el")
+(find-file "~/.emacs.d/diary")
+(find-file "~/org/notes.org")
+(find-file "~/org/timekeeping.org")
+(find-file "~/org/todo.org")
+(find-file "~/org/victoriae.org")
+(find-file "~/org/schklorpya.org")
+(find-file "~/org/catch.org")
+#+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 ;;(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-16"))
-
-
 
 ;; Use org-mode
 ;;(use-package org
@@ -383,29 +411,6 @@ See: URL `http://en.wikipedia.org/wiki/ISO_8601'
      (format-time-string "%z")))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Open some useful buffers
-
-(eshell)
-
-(ansi-term "/bin/bash")
-
-;;(diary)
-
-(find-file "~/.emacs.d/init.el")
-
-(find-file "~/.emacs.d/diary")
-
-(find-file "~/org/notes.org")
-
-(find-file "~/org/timekeeping.org")
-
-(find-file "~/org/todo.org")
-
-(find-file "~/org/victoriae.org")
-
-(find-file "~/org/schklorpya.org")
-
-(find-file "~/org/catch.org")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; function to wrap blocks of text in org templates                       ;;
@@ -501,18 +506,6 @@ Version 2017-06-19"
         (insert x "\n--------------------------------------------------\n\n"))
       (goto-char (point-min)))))
 
-;; use an org file to organise feeds
-(use-package elfeed-org
-  :ensure t
-  :config
-  (elfeed-org)
-  (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org")))
-;;  (setq rmh-elfeed-org-auto-ignore-invalid-feeds t))
-
-(use-package elfeed-web
-  :ensure t
-  :config
-  (elfeed-web-start))
 
 ;;(setq mouse-buffer-menu-maxlen 20)
 
