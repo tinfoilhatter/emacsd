@@ -1,0 +1,534 @@
+#+BEGIN_SRC emacs-lisp
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Basic settings
+
+;;(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-16"))
+
+
+'(("gnu" . "http://elpa.gnu.org/packages/")
+("marmalade" . "http://marmalade-repo.org/packages/")
+("melpa" . "http://melpa.milkbox.net/packages/"))
+(package-initialize)
+
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish)
+(require 'bind-key)
+
+;; Use org-mode
+;;(use-package org
+;;  :ensure t
+;;  :mode ("\\.org$" . org-mode))
+
+;; Likely to cause problems. Move load-path elsewhere.
+;;(add-to-list 'load-path "~/.emacs.d/")
+
+(setq visible-bell t)
+(global-hl-line-mode 1) ; turn on highlighting current line
+(setq inhibit-startup-screen t)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; warn when opening files bigger than 100MB
+(setq large-file-warning-threshold 100000000)
+
+(setq org-log-done 'time)
+(setq org-agenda-include-diary t)
+(setq diary-file "~/emacs/diarydata")
+(setq org-agenda-files '("~/org"))
+
+(setq org-enforce-todo-dependencies t)
+;;(require 'org-depend) ;; more complex dependencies
+
+;; display agenda in a single window
+;;(add-hook 'org-agenda-finalize-hook (lambda () (delete-other-windows)))
+
+;; begin agenda with today and extend out a month
+(setq org-agenda-start-on-weekday nil)
+(setq org-agenda-span 31)
+
+(setq cal-tex-holidays t) ;; printed calendars show the holidays in calendar-holidays
+(setq cal-tex-diary t) ;; printed calendars show diary entries
+;;(calendar-set-date-style 'iso)
+
+(setq calendar-bahai-all-holidays-flag t)
+(setq calendar-christian-all-holidays-flag t)
+(setq calendar-hebrew-all-holidays-flag t)
+(setq calendar-islamic-all-holidays-flag t)
+
+(setq zone-when-idle t)
+
+
+(tool-bar-mode -1)
+
+(setq org-export-with-section-numbers nil)
+(setq org-export-with-smart-quotes t)
+(setq org-export-with-sub-superscripts nil)
+(setq org-export-with-toc t)
+
+(eval-after-load "org"
+  '(require 'ox-md nil t))
+
+;;(setq org-clock-persist 'history)
+;;(org-clock-persistence-insinuate)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; abbreviations                                                          ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(setq-default abbrev-mode t)
+;; save abbreviations upon exiting xemacs
+(setq save-abbrevs t)
+;; set the file storing the abbreviations
+(setq abbrev-file-name "~/.emacs.d/my-abbreviations.el")
+;; reads the abbreviations file on startup
+(quietly-read-abbrev-file)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Most keybindings
+
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+(global-set-key "\C-cb" 'org-iswitchb)
+
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+(global-set-key (kbd "s-e") 'shell)
+(global-set-key (kbd "M-Q") 'unfill-paragraph)
+(global-set-key (kbd "M-o") 'fortune) ;; Oblique Strategies
+(global-set-key (kbd "M-s") 'sort-lines)
+
+;; Begin and end WordPress blog post
+(global-set-key (kbd "M-p") 'org2blog/wp-new-entry)
+(global-set-key (kbd "M-P") 'org2blog/wp-post-buffer)
+
+(global-set-key (kbd "M-f") 'fullscreen-toggle)
+(global-set-key (kbd "M-F") 'writeroom-mode)
+
+(global-set-key (kbd "C-x w") 'elfeed)
+(global-set-key "\C-x\ \C-r" 'recentf-open-files)
+
+(define-key global-map "\C-cc" 'org-capture)
+(global-set-key (kbd "C-t") 'insert-date-time)
+
+(global-set-key (kbd "s-x") 'yubnub)
+
+(global-set-key (kbd "C-x e") 'eval-buffer)
+
+(global-set-key (kbd "M-y") 'xah-show-kill-ring)
+
+;; Helm
+;(global-set-key (kbd "M-x") 'helm-M-x)
+;(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+;(global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Strip Smart Quotes
+
+(defun strip-smart-quotes (rStart rEnd)
+  "Replace smart quotes with plain quotes in text"
+  (interactive "r")
+  (save-restriction
+  (narrow-to-region rStart rEnd)
+  (goto-char (point-min))
+  (while (re-search-forward "[\342\200\234\342\200\235]" nil t) (replace-match "\"" nil t))
+  (goto-char (point-min))
+  (while (re-search-forward "[\342\200\230\342\200\231]" nil t) (replace-match "'" nil t))
+))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Fullscreen mode; also see Writeroom Mode for a more thorough
+;; version
+;;(require 'fullscreen)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.org/packages/") t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Package manager
+(require 'package)
+(package-initialize)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Enable block comments (in theory)
+;;(require 'org-exp-blocks)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Markdown mode
+(autoload 'markdown-mode "markdown-mode"
+   "Major mode for editing Markdown files" t)
+;;(add-to-list 'auto-mode-alist '("\\.txt\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
+;;(add-to-list 'auto-mode-alist '("\\.fw\\'" . markdown-mode))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Live word count
+; From Sacha Chua's blog
+
+(defvar count-words-buffer
+  nil
+  "*Number of words in the buffer.")
+
+(defun wicked/update-wc ()
+  (interactive)
+  (setq count-words-buffer (number-to-string (count-words-buffer)))
+  (force-mode-line-update))
+  
+; only setup timer once
+(unless count-words-buffer
+  ;; seed count-words-paragraph
+  ;; create timer to keep count-words-paragraph updated
+  (run-with-idle-timer 1 t 'wicked/update-wc))
+
+;; add count words paragraph the mode line
+(unless (memq 'count-words-buffer global-mode-string)
+  (add-to-list 'global-mode-string "words: " t)
+  (add-to-list 'global-mode-string 'count-words-buffer t)) 
+
+;; count number of words in current paragraph
+(defun count-words-buffer ()
+  "Count the number of words in the current paragraph."
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (let ((count 0))
+      (while (not (eobp))
+	(forward-word 1)
+        (setq count (1+ count)))
+      count)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; Org-mode
+
+(add-to-list 'load-path "~/emacs/org/lisp")
+(add-to-list 'load-path "~/emacs/org/contrib/lisp" t)
+
+;; The following lines are always needed. Choose your own keys.
+(add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
+;; See also list of keys at top of config
+ 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; FunnelWeb
+;;(require 'fw-mode)
+;;(require 'switch-mode)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Add a recent items menu
+
+(require 'recentf)
+(recentf-mode 1)
+(setq recentf-max-menu-items 25)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Post an article to Wordpress
+
+(setq org2blog/wp-blog-alist
+      '(("wordpress"
+         :url "https://oddsnentities.wordpress.com/xmlrpc.php"
+         :username "oddsnentities"
+         :default-title "TK"
+         :default-categories ("TK" "TK")
+         :tags-as-categories nil)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Markdown exporter
+;; conflicts with clocking
+;;(eval-after-load "org"
+;;  '(require 'ox-md nil t))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; checks (on saving) whether the file you edit contains a shebang, 
+;; and if yes, makes it executable
+(add-hook 'after-save-hook
+'executable-make-buffer-file-executable-if-script-p) 
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Unfill Paragraph -- from sachac via Michael Fogleman
+(defun unfill-paragraph (&optional region)
+  "Takes a multi-line paragraph and makes it into a single line of text."
+  (interactive (progn
+                 (barf-if-buffer-read-only)
+                 (list t)))
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil region)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; TODO keywords
+
+(setq org-todo-keywords
+       '((sequence "TODO" "RESEARCH" "|" "DONE" "DELEGATED" "CANCELLED")))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Org Capture
+
+(setq org-capture-templates
+      '(("t" "Todo" entry (file "~/Dropbox/org/catch.org")
+             "**** TODO %?\n")
+        ("h" "Catch" entry (file+datetree "~/Dropbox/org/catch.org")
+             "* %?\n")
+        ("v" "Victoriae" plain (file "~/Dropbox/org/victoriae.org")
+	 "\n\n%?\n")
+	("x" "org-protocol" entry (file "~/web.org")
+	 "* TODO Review %c\n%U\n%i\n" :immediate-finish)))
+
+(define-key global-map "\C-ct"
+        (lambda () (interactive) (org-capture nil "t")))
+
+(define-key global-map "\C-ch"
+        (lambda () (interactive) (org-capture nil "h")))
+
+(define-key global-map "\C-cv"
+        (lambda () (interactive) (org-capture nil "v")))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Yubnub
+
+(defun yubnub (command)
+  "Use `browse-url' to submit a command to yubnub and open
+result in an external browser defined in `browse-url-browser-function'.
+
+To get started, `M-x yubnub <RET> ls <RET>' will return a list of 
+all yubnub commands."
+  (interactive "sYubnub: ")
+  (browse-url 
+   (concat "http://yubnub.org/parser/parse?command=" command)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; gforth.el
+(autoload 'forth-mode "gforth.el")
+     (setq auto-mode-alist (cons '("\\.fs\\'" . forth-mode)
+			    auto-mode-alist))
+     (autoload 'forth-block-mode "gforth.el")
+     (setq auto-mode-alist (cons '("\\.fb\\'" . forth-block-mode)
+			    auto-mode-alist))
+     (add-hook 'forth-mode-hook (function (lambda ()
+        ;; customize variables here:
+        (setq forth-indent-level 4)
+        (setq forth-minor-indent-level 2)
+        (setq forth-hilight-level 3)
+        ;;; ...
+     )))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Org in calendar
+(add-hook 'org-finalize-agenda-hook
+  (lambda ()
+    (setq appt-message-warning-time 10        ;; warn 10 min in advance
+          appt-display-diary nil              ;; don't display diary when (appt-activate) is called
+          appt-display-mode-line t            ;; show in the modeline
+          appt-display-format 'window         ;; display notification in window
+          calendar-mark-diary-entries-flag t) ;; mark diary entries in calendar
+    (org-agenda-to-appt)                      ;; copy all agenda schedule to appointments
+    (appt-activate 1)))                       ;; active appt (appointment notification)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; patch org mode to use vertical splitting
+(defadvice org-prepare-agenda (after org-fix-split)
+  (toggle-window-split))
+(ad-activate 'org-prepare-agenda)
+
+(defun toggle-window-split ()
+  (interactive)
+  (if (= (count-windows) 2)
+      (let* ((this-win-buffer (window-buffer))
+	     (next-win-buffer (window-buffer (next-window)))
+	     (this-win-edges (window-edges (selected-window)))
+	     (next-win-edges (window-edges (next-window)))
+	     (this-win-2nd (not (and (<= (car this-win-edges)
+					 (car next-win-edges))
+				     (<= (cadr this-win-edges)
+					 (cadr next-win-edges)))))
+	     (splitter
+	      (if (= (car this-win-edges)
+		     (car (window-edges (next-window))))
+		  'split-window-horizontally
+		'split-window-vertically)))
+	(delete-other-windows)
+	(let ((first-win (selected-window)))
+	  (funcall splitter)
+	  (if this-win-2nd (other-window 1))
+	  (set-window-buffer (selected-window) this-win-buffer)
+	  (set-window-buffer (next-window) next-win-buffer)
+	  (select-window first-win)
+	  (if this-win-2nd (other-window 1))))))
+
+(define-key ctl-x-4-map "t" 'toggle-window-split)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Xah Lee
+
+(defun insert-date-time ()
+  "Insert current date-time string in full
+ISO 8601 format.
+Example: 2010-11-29T23:23:35-08:00
+See: URL `http://en.wikipedia.org/wiki/ISO_8601'
+"
+  (interactive)
+  (when (use-region-p)
+    (delete-region (region-beginning) (region-end) )
+    )
+  (insert
+   (concat
+    (format-time-string "%Y-%m-%dT%T")
+    ((lambda (x) (concat (substring x 0 3) ":" (substring x 3 5)))
+     (format-time-string "%z")))))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Open some useful buffers
+
+(eshell)
+
+(ansi-term "/bin/bash")
+
+;;(diary)
+
+(find-file "~/.emacs.d/init.el")
+
+(find-file "~/.emacs.d/diary")
+
+(find-file "~/org/notes.org")
+
+(find-file "~/org/timekeeping.org")
+
+(find-file "~/org/todo.org")
+
+(find-file "~/org/victoriae.org")
+
+(find-file "~/org/schklorpya.org")
+
+(find-file "~/org/catch.org")
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; function to wrap blocks of text in org templates                       ;;
+;; e.g. latex or src etc                                                  ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun org-begin-template ()
+  "Make a template at point."
+  (interactive)
+  (if (org-at-table-p)
+      (call-interactively 'org-table-rotate-recalc-marks)
+    (let* ((choices '(("s" . "SRC")
+                      ("e" . "EXAMPLE")
+                      ("q" . "QUOTE")
+                      ("v" . "VERSE")
+                      ("c" . "CENTER")
+                      ("l" . "LaTeX")
+                      ("h" . "HTML")
+                      ("a" . "ASCII")))
+           (key
+            (key-description
+             (vector
+              (read-key
+               (concat (propertize "Template type: " 'face 'minibuffer-prompt)
+                       (mapconcat (lambda (choice)
+                                    (concat (propertize (car choice) 'face 'font-lock-type-face)
+                                            ": "
+                                            (cdr choice)))
+                                  choices
+                                  ", ")))))))
+      (let ((result (assoc key choices)))
+        (when result
+          (let ((choice (cdr result)))
+            (cond
+             ((region-active-p)
+              (let ((start (region-beginning))
+                    (end (region-end)))
+                (goto-char end)
+                (insert "#+END_" choice "\n")
+                (goto-char start)
+                (insert "#+BEGIN_" choice "\n")))
+             (t
+              (insert "#+BEGIN_" choice "\n")
+              (save-excursion (insert "#+END_" choice))))))))))
+
+;;bind to key
+(define-key org-mode-map (kbd "C-<") 'org-begin-template)
+
+(put 'upcase-region 'disabled nil)
+
+;;Org as word processor
+;;(setq org-hide-emphasis-markers t)
+
+(font-lock-add-keywords 'org-mode
+                        '(("^ +\\([-*]\\) "
+                           (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages
+   (quote
+    (init-magit org-link-minor-mode pandoc-mode elfeed-web elfeed-org use-package ace-jump-mode yaoddmuse pdf-tools magit melpa-upstream-visit org))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(org-document-title ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif" :height 1.5 :underline nil))))
+ '(org-level-1 ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif" :height 1.75))))
+ '(org-level-2 ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif" :height 1.5))))
+ '(org-level-3 ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif" :height 1.25))))
+ '(org-level-4 ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif" :height 1.1))))
+ '(org-level-5 ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif"))))
+ '(org-level-6 ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif"))))
+ '(org-level-7 ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif"))))
+ '(org-level-8 ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif")))))
+
+
+(defun xah-show-kill-ring ()
+  "Insert all `kill-ring' content in a new buffer.
+
+URL `http://ergoemacs.org/emacs/emacs_show_kill_ring.html'
+Version 2017-06-19"
+  (interactive)
+  (let (($buf (generate-new-buffer "untitled")))
+    (progn
+      (switch-to-buffer $buf)
+      (funcall 'fundamental-mode)
+      (setq buffer-offer-save t)
+      (dolist (x kill-ring )
+        (insert x "\n--------------------------------------------------\n\n"))
+      (goto-char (point-min)))))
+
+;; use an org file to organise feeds
+(use-package elfeed-org
+  :ensure t
+  :config
+  (elfeed-org)
+  (setq rmh-elfeed-org-files (list "~/.emacs.d/elfeed.org")))
+;;  (setq rmh-elfeed-org-auto-ignore-invalid-feeds t))
+
+(use-package elfeed-web
+  :ensure t
+  :config
+  (elfeed-web-start))
+
+;;(setq mouse-buffer-menu-maxlen 20)
+
+;; After Michael Fogleman
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "firefox")
+;;(bind-key "C-c B" 'browse-url-at-point)
+
+
+;;(use-package pandoc-mode
+;;  :ensure t
+;;  :config
+;;  (add-hook 'markdown-mode-hook 'pandoc-mode)
+;;  (add-hook 'org-mode-hook 'pandoc-mode)
+;;  (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings))
+
+(use-package magit
+  :ensure t
+  :config
+)
+#+END_SRC
+
