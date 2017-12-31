@@ -1,10 +1,5 @@
+* Package management
 #+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Basic settings
-
-;;(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-16"))
-
-
 '(("gnu" . "http://elpa.gnu.org/packages/")
 ("marmalade" . "http://marmalade-repo.org/packages/")
 ("melpa" . "http://melpa.milkbox.net/packages/"))
@@ -18,6 +13,14 @@
   (require 'use-package))
 (require 'diminish)
 (require 'bind-key)
+#+END_SRC
+
+* Miscellaneous
+
+#+BEGIN_SRC emacs-lisp
+;;(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-16"))
+
+
 
 ;; Use org-mode
 ;;(use-package org
@@ -531,4 +534,3 @@ Version 2017-06-19"
   :config
 )
 #+END_SRC
-
