@@ -33,7 +33,6 @@
 * Miscellaneous
 
 ** Open some useful buffers
-
 #+BEGIN_SRC emacs-lisp
 (eshell)
 (ansi-term "/bin/bash")
@@ -47,13 +46,18 @@
 (find-file "~/org/catch.org")
 #+END_SRC
 
+** Org-mode
+#+BEGIN_SRC emacs-lisp
 ;;(add-to-list 'default-frame-alist '(font . "DejaVu Sans Mono-16"))
 
 ;; Use org-mode
 ;;(use-package org
 ;;  :ensure t
 ;;  :mode ("\\.org$" . org-mode))
+#+END_SRC
 
+** Misc
+#+BEGIN_SRC emacs-lisp
 (setq visible-bell t)
 (global-hl-line-mode 1) ; turn on highlighting current line
 (setq inhibit-startup-screen t)
@@ -112,9 +116,9 @@
 (setq abbrev-file-name "~/.emacs.d/my-abbreviations.el")
 ;; reads the abbreviations file on startup
 (quietly-read-abbrev-file)
+#+END_SRC
 
 ** Miscellaneous keybindings
-
 #+BEGIN_SRC emacs-lisp
 (global-set-key "\C-cl" 'org-store-link)
 (global-set-key "\C-ca" 'org-agenda)
@@ -126,7 +130,9 @@
 (global-set-key (kbd "M-Q") 'unfill-paragraph)
 (global-set-key (kbd "M-o") 'fortune) ;; Oblique Strategies
 (global-set-key (kbd "M-s") 'sort-lines)
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
 ;; Begin and end WordPress blog post
 (global-set-key (kbd "M-p") 'org2blog/wp-new-entry)
 (global-set-key (kbd "M-P") 'org2blog/wp-post-buffer)
@@ -152,9 +158,6 @@
 ;(global-set-key (kbd "C-x C-f") 'helm-find-files)
 #+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Strip Smart Quotes
-
 ** Strip smart quotes
 #+BEGIN_SRC emacs-lisp
 (defun strip-smart-quotes (rStart rEnd)
@@ -169,6 +172,8 @@
 ))
 #+END_SRC
 
+** Misc
+#+BEGIN_SRC emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fullscreen mode; also see Writeroom Mode for a more thorough
 ;; version
@@ -181,7 +186,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Package manager
-(require 'package)
+(require a'package)
 (package-initialize)
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
@@ -197,6 +202,7 @@
 (add-to-list 'auto-mode-alist '("\\.markdown\\'" . markdown-mode))
 (add-to-list 'auto-mode-alist '("\\.md\\'" . markdown-mode))
 ;;(add-to-list 'auto-mode-alist '("\\.fw\\'" . markdown-mode))
+#+END_SRC
 
 ** Live word count (Sacha Chua) 
 #+BEGIN_SRC emacs-lisp
@@ -233,8 +239,6 @@
       count)))
 #+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; Org-mode
 
 ** Org-mode
 #+BEGIN_SRC emacs-lisp
@@ -245,22 +249,24 @@
 (add-hook 'org-mode-hook 'turn-on-font-lock) ; not needed when global-font-lock-mode is on
 ;; See also list of keys at top of config
 #+END_SRC
- 
+
+** Funnelweb
+#+BEGIN_SRC emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; FunnelWeb
 ;;(require 'fw-mode)
 ;;(require 'switch-mode)
+#+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Add a recent items menu
-
+** Add a recent items menu
+#+BEGIN_SRC emacs-lisp
 (require 'recentf)
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
+#+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Post an article to Wordpress
-
+** Post an article to Wordpress
+#+BEGIN_SRC emacs-lisp
 (setq org2blog/wp-blog-alist
       '(("wordpress"
          :url "https://oddsnentities.wordpress.com/xmlrpc.php"
@@ -268,19 +274,26 @@
          :default-title "TK"
          :default-categories ("TK" "TK")
          :tags-as-categories nil)))
+#+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Markdown exporter
+** Markdown exporter 
+#+BEGIN_SRC emacs-lisp
 ;; conflicts with clocking
 ;;(eval-after-load "org"
 ;;  '(require 'ox-md nil t))
+#+END_SRC
 
+** Shebangs
+#+BEGIN_SRC emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; checks (on saving) whether the file you edit contains a shebang, 
 ;; and if yes, makes it executable
 (add-hook 'after-save-hook
 'executable-make-buffer-file-executable-if-script-p) 
+#+END_SRC
 
+** Unfill paragraph
+#+BEGIN_SRC emacs-lisp
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Unfill Paragraph -- from sachac via Michael Fogleman
 (defun unfill-paragraph (&optional region)
@@ -290,16 +303,16 @@
                  (list t)))
   (let ((fill-column (point-max)))
     (fill-paragraph nil region)))
+#+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; TODO keywords
-
+** TODO keywords
+#+BEGIN_SRC emacs-lisp
 (setq org-todo-keywords
        '((sequence "TODO" "RESEARCH" "|" "DONE" "DELEGATED" "CANCELLED")))
+#+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Org Capture
-
+** Org Capture
+#+BEGIN_SRC emacs-lisp
 (setq org-capture-templates
       '(("t" "Todo" entry (file "~/Dropbox/org/catch.org")
              "**** TODO %?\n")
@@ -318,10 +331,10 @@
 
 (define-key global-map "\C-cv"
         (lambda () (interactive) (org-capture nil "v")))
+#+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Yubnub
-
+** Yubnub
+#+BEGIN_SRC emacs-lisp
 (defun yubnub (command)
   "Use `browse-url' to submit a command to yubnub and open
 result in an external browser defined in `browse-url-browser-function'.
@@ -331,9 +344,10 @@ all yubnub commands."
   (interactive "sYubnub: ")
   (browse-url 
    (concat "http://yubnub.org/parser/parse?command=" command)))
+#+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; gforth.el
+** Gforth
+#+BEGIN_SRC emacs-lisp
 (autoload 'forth-mode "gforth.el")
      (setq auto-mode-alist (cons '("\\.fs\\'" . forth-mode)
 			    auto-mode-alist))
@@ -347,9 +361,10 @@ all yubnub commands."
         (setq forth-hilight-level 3)
         ;;; ...
      )))
+#+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Org in calendar
+** Org in calendar 
+#+BEGIN_SRC emacs-lisp
 (add-hook 'org-finalize-agenda-hook
   (lambda ()
     (setq appt-message-warning-time 10        ;; warn 10 min in advance
@@ -359,9 +374,10 @@ all yubnub commands."
           calendar-mark-diary-entries-flag t) ;; mark diary entries in calendar
     (org-agenda-to-appt)                      ;; copy all agenda schedule to appointments
     (appt-activate 1)))                       ;; active appt (appointment notification)
+#+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; patch org mode to use vertical splitting
+** patch org mode to use vertical splitting 
+#+BEGIN_SRC emacs-lisp
 (defadvice org-prepare-agenda (after org-fix-split)
   (toggle-window-split))
 (ad-activate 'org-prepare-agenda)
@@ -392,10 +408,10 @@ all yubnub commands."
 	  (if this-win-2nd (other-window 1))))))
 
 (define-key ctl-x-4-map "t" 'toggle-window-split)
+#+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Xah Lee
-
+** From Xah Lee
+#+BEGIN_SRC emacs-lisp
 (defun insert-date-time ()
   "Insert current date-time string in full
 ISO 8601 format.
@@ -413,11 +429,10 @@ See: URL `http://en.wikipedia.org/wiki/ISO_8601'
      (format-time-string "%z")))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+#+END_SRC
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; function to wrap blocks of text in org templates                       ;;
-;; e.g. latex or src etc                                                  ;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+** function to wrap blocks of text in org templates
+#+BEGIN_SRC emacs-lisp
 (defun org-begin-template ()
   "Make a template at point."
   (interactive)
@@ -459,9 +474,13 @@ See: URL `http://en.wikipedia.org/wiki/ISO_8601'
 
 ;;bind to key
 (define-key org-mode-map (kbd "C-<") 'org-begin-template)
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
 (put 'upcase-region 'disabled nil)
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
 ;;Org as word processor
 ;;(setq org-hide-emphasis-markers t)
 
@@ -491,8 +510,9 @@ See: URL `http://en.wikipedia.org/wiki/ISO_8601'
  '(org-level-6 ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif"))))
  '(org-level-7 ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif"))))
  '(org-level-8 ((t (:inherit default :weight bold :foreground "black" :family "Sans Serif")))))
+#+END_SRC
 
-
+#+BEGIN_SRC emacs-lisp
 (defun xah-show-kill-ring ()
   "Insert all `kill-ring' content in a new buffer.
 
@@ -507,23 +527,29 @@ Version 2017-06-19"
       (dolist (x kill-ring )
         (insert x "\n--------------------------------------------------\n\n"))
       (goto-char (point-min)))))
+#+END_SRC
 
-
+#+BEGIN_SRC emacs-lisp
 ;;(setq mouse-buffer-menu-maxlen 20)
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
 ;; After Michael Fogleman
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "firefox")
 ;;(bind-key "C-c B" 'browse-url-at-point)
+#+END_SRC
 
-
+#+BEGIN_SRC emacs-lisp
 ;;(use-package pandoc-mode
 ;;  :ensure t
 ;;  :config
 ;;  (add-hook 'markdown-mode-hook 'pandoc-mode)
 ;;  (add-hook 'org-mode-hook 'pandoc-mode)
 ;;  (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings))
+#+END_SRC
 
+#+BEGIN_SRC emacs-lisp
 (use-package magit
   :ensure t
   :config
