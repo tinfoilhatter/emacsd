@@ -52,6 +52,7 @@
 **** [[http://pragmaticemacs.com/feed/][Pragmatic Emacs]]
 **** [[https://www.masteringemacs.org/feed][Mastering Emacs]]
 **** [[http://howardism.org/index.xml][Howardism]]
+**** [[http://www.wilfred.me.uk/rss.xml][Wilfred Hughes]]
 *** retrocomputing
 **** [[http://ascii.textfiles.com/feed][ASCII by Jason Scott]]
 **** [[http://classiccomputing.com/CC/Blog/rss.xml][Classic Computing]]
