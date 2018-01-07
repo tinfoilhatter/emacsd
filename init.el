@@ -14,7 +14,7 @@
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (init-magit org-link-minor-mode pandoc-mode elfeed-web elfeed-org use-package ace-jump-mode yaoddmuse pdf-tools magit melpa-upstream-visit org))))
+    (writeroom-mode init-magit org-link-minor-mode pandoc-mode elfeed-web elfeed-org use-package ace-jump-mode yaoddmuse pdf-tools magit melpa-upstream-visit org))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

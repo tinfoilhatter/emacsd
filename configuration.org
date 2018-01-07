@@ -1,9 +1,11 @@
 * Literate Emacs init file, Ron Hale-Evans <rwhe@ludism.org>
 ** Package management
 #+BEGIN_SRC emacs-lisp
-'(("gnu" . "http://elpa.gnu.org/packages/")
-("marmalade" . "http://marmalade-repo.org/packages/")
-("melpa" . "http://melpa.milkbox.net/packages/"))
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
+(add-to-list 'package-archives '("marmalade" . "http://marmalade-repo.org/packages/"))
+(add-to-list 'package-archives '("gnu" . "http://elpa.gnu.org/packages/"))
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
@@ -15,20 +17,12 @@
 (require 'diminish)
 (require 'bind-key)
 
-;(require 'package)
-;(add-to-list 'package-archives
-;             '("melpa" . "http://melpa.org/packages/") t)
-;; Package manager
-;(require 'package)
-;(package-initialize)
-;(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-
-;(use-package pandoc-mode
-;  :ensure t
-;  :config
-;  (add-hook 'markdown-mode-hook 'pandoc-mode)
-;  (add-hook 'org-mode-hook 'pandoc-mode)
-;  (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings))
+(use-package pandoc-mode
+  :ensure t
+  :config
+  (add-hook 'markdown-mode-hook 'pandoc-mode)
+  (add-hook 'org-mode-hook 'pandoc-mode)
+  (add-hook 'pandoc-mode-hook 'pandoc-load-default-settings))
 
 (use-package magit
   :ensure t
@@ -47,13 +41,18 @@
   (elfeed-web-start))
 
 (global-set-key (kbd "C-x w") 'elfeed)
+
+(use-package writeroom-mode
+    :commands (writeroom-mode)
+    :config
+(setq writeroom-restore-window-config t))
 #+END_SRC
 
 ** Open some useful buffers
 #+BEGIN_SRC emacs-lisp
 (eshell)
 (ansi-term "/bin/bash")
-(find-file "~/.emacs.d/init.el")
+(find-file "~/.emacs.d/configuration.org")
 (find-file "~/.emacs.d/diary")
 (find-file "~/org/notes.org")
 (find-file "~/org/timekeeping.org")
@@ -299,6 +298,8 @@ Version 2017-06-19"
       (dolist (x kill-ring )
         (insert x "\n--------------------------------------------------\n\n"))
       (goto-char (point-min)))))
+
+(global-set-key (kbd "M-y") 'xah-show-kill-ring)
 #+END_SRC
 
 ** Set primary browser to Firefox (Michael Fogleman)
@@ -306,43 +307,6 @@ Version 2017-06-19"
 (setq browse-url-browser-function 'browse-url-generic
       browse-url-generic-program "firefox")
 ;;(bind-key "C-c B" 'browse-url-at-point)
-#+END_SRC
-
-** Miscellaneous preferences
-#+BEGIN_SRC emacs-lisp
-(setq visible-bell t)
-
-(global-hl-line-mode 1) ; turn on highlighting current line
-
-(setq inhibit-startup-screen t)
-
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
-
-;; warn when opening files bigger than 100MB
-(setq large-file-warning-threshold 100000000)
-
-(setq zone-when-idle t)
-
-(tool-bar-mode -1)
-
-(put 'upcase-region 'disabled nil)
-#+END_SRC
-
-** Miscellaneous keybindings
-#+BEGIN_SRC emacs-lisp
-(global-set-key (kbd "C-+") 'text-scale-increase)
-(global-set-key (kbd "C--") 'text-scale-decrease)
-(global-set-key (kbd "s-e") 'shell)
-(global-set-key (kbd "M-o") 'fortune) ;; Oblique Strategies
-(global-set-key (kbd "M-s") 'sort-lines)
-
-(global-set-key (kbd "C-x e") 'eval-buffer)
-
-;; Helm
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "M-y") 'helm-show-kill-ring)
-;(global-set-key (kbd "M-y") 'xah-show-kill-ring)
 #+END_SRC
 
 ** Strip smart quotes
@@ -357,17 +321,6 @@ Version 2017-06-19"
   (goto-char (point-min))
   (while (re-search-forward "[\342\200\230\342\200\231]" nil t) (replace-match "'" nil t))
 ))
-#+END_SRC
-
-** Fullscreen mode
-#+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Fullscreen mode; also see Writeroom Mode for a more thorough
-;; version
-;;(require 'fullscreen)
-
-(global-set-key (kbd "M-f") 'fullscreen-toggle)
-(global-set-key (kbd "M-F") 'writeroom-mode)
 #+END_SRC
 
 ** Markdown mode
@@ -532,5 +485,41 @@ See: URL `http://en.wikipedia.org/wiki/ISO_8601'
      (format-time-string "%z")))))
 
 (global-set-key (kbd "C-t") 'insert-date-time)
+#+END_SRC
+
+** Miscellaneous preferences
+#+BEGIN_SRC emacs-lisp
+(setq visible-bell t)
+
+(global-hl-line-mode 1) ; turn on highlighting current line
+
+(setq inhibit-startup-screen t)
+
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; warn when opening files bigger than 100MB
+(setq large-file-warning-threshold 100000000)
+
+(setq zone-when-idle t)
+
+(tool-bar-mode -1)
+
+(put 'upcase-region 'disabled nil)
+#+END_SRC
+
+** Miscellaneous keybindings
+#+BEGIN_SRC emacs-lisp
+(global-set-key (kbd "C-+") 'text-scale-increase)
+(global-set-key (kbd "C--") 'text-scale-decrease)
+
+(global-set-key (kbd "C-x e") 'eval-buffer)
+
+(global-set-key (kbd "s-e") 'eshell)
+
+;(global-set-key (kbd "M-o") 'fortune) ;; Oblique Strategies
+
+(global-set-key (kbd "M-s") 'sort-lines)
+
+(global-set-key [f11] 'toggle-frame-fullscreen)
 #+END_SRC
 
