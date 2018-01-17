@@ -42,6 +42,7 @@
 *** [[http://www.theverge.com/circuitbreaker/rss/index.xml][The Verge]]
 *** [[http://www.addictivetips.com/feed/][Addictive Tips]]
 *** [[http://lunduke.com/feed/][Lunduke.com]]
+*** [[https://www.reddit.com/r/GPDPocket.rss][/r/GPDPocket]]
 *** emacs
 **** [[http://emacsrocks.com/atom.xml][Emacs Rocks!]]
 **** [[http://endlessparentheses.com/atom.xml][Endless Parentheses]]
@@ -275,3 +276,5 @@
 *** [[https://higherspace.wordpress.com/feed/][Fairyland of Geometry]]
 *** [[https://meditationmakesense.com/feed/][Meditation Makes Sense]]
 *** [[https://www.psychologytoday.com/blog/dont-delay/feed][Don't Delay]]
+*** [[https://aeon.co/feed.rss][Aeon]]
+*** [[https://feeds.pinboard.in/rss/u:kevan/][Pinboard (kevan)]]

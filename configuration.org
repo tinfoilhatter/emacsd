@@ -73,7 +73,7 @@
 
 (setq org-log-done 'time)
 (setq org-agenda-include-diary t)
-(setq diary-file "~/emacs/diarydata")
+(setq diary-file "~/.emacs.d/diarydata")
 (setq org-agenda-files '("~/org"))
 
 (setq org-enforce-todo-dependencies t)
@@ -378,8 +378,6 @@ Version 2017-06-19"
 
 ** Funnelweb
 #+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; FunnelWeb
 ;;(require 'fw-mode)
 ;;(require 'switch-mode)
 #+END_SRC
@@ -408,7 +406,6 @@ Version 2017-06-19"
 #+END_SRC
 ** Shebangs
 #+BEGIN_SRC emacs-lisp
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; checks (on saving) whether the file you edit contains a shebang, 
 ;; and if yes, makes it executable
 (add-hook 'after-save-hook
