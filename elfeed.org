@@ -73,6 +73,7 @@
 *** [[http://acta-lingweenie.tumblr.com/rss][Acta Lingweenie]]
 *** [[http://dedalvs.tumblr.com/rss][Imeimei]]
 *** [[http://fakelinguist.wakayos.com/?feed=rss2][Fake languages by a fake linguist]]
+*** [[http://miniatureconlangs.blogspot.com/feeds/posts/default][miniatureconlangs]]
 ** curiosities
 *** [[http://damninteresting.com/feed][Damn Interesting]]
 *** [[http://www.damninteresting.com/?feed=rss2][Damn Interesting]]
@@ -198,6 +199,7 @@
 *** [[http://textfiles.libsyn.com/rss][Jason Scott Talks His Way Out of It]]
 *** [[http://iprocrastinate.libsyn.com//rss][iProcrastinate Podcast]]
 *** [[http://humankindpodcast.org/pc/feed/podcast][Humankind]]
+*** [[http://feeds.feedburner.com/onthemedia?format=xml][On the Media]]
 ** politics
 *** [[http://apprenticealf.wordpress.com/feed/][Apprentice Alf]]
 *** [[http://feeds.propublica.org/propublica/main][ProPublica]]
