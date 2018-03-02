@@ -124,6 +124,7 @@
 *** [[http://scarfolk.blogspot.com/feeds/posts/default][Scarfolk Council]]
 *** [[http://darwinawards.com/rss.xml][Darwin Awards]]
 *** [[http://historiadiscordia.com/feed/][Historia Discordia]]
+*** [[http://feeds.feedburner.com/CrackedRSS][Cracked]]q
 ** futurism
 *** [[http://marsnews.com/feed][Mars News]]
 *** [[https://futurism.com/feed/][Futurism]]
@@ -160,6 +161,10 @@
 *** [[https://greenboxofgames.com/feed/][Green Box of Games]]
 *** [[http://selinker.tumblr.com/rss][Mike Selinker]]
 *** [[http://analoggamestudies.org/feed/][Analog Game Studies]]
+*** [[http://www.analoggames.com/feed/][Analog Games]]
+*** [[https://cheapass.com/feed/][Cheapass Games]]
+*** [[http://1playerpodcast.com/feed/][1 Player Podcast]]
+*** [[http://lowplayercount.libsyn.com/rss][Low Player Count]]
 ** if
 *** [[http://planet-if.com/atom.xml][Planet Interactive Fiction]]
 *** [[http://pr-if.org/feed/][People's Republic of IF]]
@@ -279,4 +284,4 @@
 *** [[https://meditationmakesense.com/feed/][Meditation Makes Sense]]
 *** [[https://www.psychologytoday.com/blog/dont-delay/feed][Don't Delay]]
 *** [[https://aeon.co/feed.rss][Aeon]]
-*** [[https://feeds.pinboard.in/rss/u:kevan/][Pinboard (kevan)]]
+*** [[https://feeds.pinboard.in/rss/u:kevan/][Pinboard (kevan)]
