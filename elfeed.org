@@ -160,6 +160,8 @@
 *** [[http://analoggamestudies.org/feed/][Analog Game Studies]]
 *** [[http://www.analoggames.com/feed/][Analog Games]]
 *** [[https://cheapass.com/feed/][Cheapass Games]]
+*** [[https://boardgamegeek.com/rss/thing/206074][The Solo System | BoardGameGeek]]
+*** [[http://www.beyondsolitaire.net/blog/feed][Beyond Solitaire Blog]]
 ** if
 *** [[http://planet-if.com/atom.xml][Planet Interactive Fiction]]
 *** [[http://pr-if.org/feed/][People's Republic of IF]]
@@ -181,15 +183,12 @@
 *** computing
 **** [[http://textfiles.libsyn.com/rss][Jason Scott Talks His Way Out of It]]
 **** [[http://rcrpodcast.com/rcrpodcast.rss][Retro Computing Roundtable]]
-
 **** [[http://www.trs80trashtalk.com/feeds/posts/default][TRS-80 Trash Talk]]
 *** conlangs
 **** [[http://conlangery.com/feed/podcast/][Conlangery Podcast]]
 *** curiosities
 **** [[http://feeds.feedburner.com/damn-interesting-podcast][Damn Interesting Podcast]]
-
 **** [[http://feedpress.me/futilitycloset][Futility Closet]]
-
 *** funny
 **** [[http://www.npr.org/rss/podcast.php?id=510299][Ask Me Another]]
 **** [[http://www.npr.org/rss/podcast.php?id=510208][Car Talk]]
@@ -201,10 +200,10 @@
 *** games
 **** [[http://1playerpodcast.com/feed/][1 Player Podcast]]
 **** [[http://lowplayercount.libsyn.com/rss][Low Player Count]]
-
+**** [[http://partyofonepodcast.com/rss][Party of One podcast]]
+**** [[http://solosaurus.libsyn.com/rss][Solosaurus]]
 *** if
 **** [[http://monsterfeet.com/grue.rss][Eaten By A Grue]]
-
 *** mentat
 **** [[http://iprocrastinate.libsyn.com//rss][iProcrastinate Podcast]]
 **** [[http://youarenotsosmart.com/feed/][You Are Not So Smart]]
@@ -259,18 +258,18 @@
 *** [[http://feeds.feedburner.com/blogspot/NAhLF][Dwindling in Unbelief]]
 *** [[http://feeds.exchristian.net/Exchristiandotnet-EncouragingEx-christians][ExChristian.Net]]
 ** wiki
-*** [[http://alphagames.org/alphawiki?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
-*** [[http://ludism.org/funferall?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
-*** [[http://ludism.org/gamedesign?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
-*** [[http://ludism.org/gameframe?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
-*** [[http://ludism.org/gbgwiki?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
-*** [[http://ludism.org/glome?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
-*** [[http://ludism.org/mentat?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
-*** [[http://ludism.org/ppwiki?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
-*** [[http://ludism.org/rainbow?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
-*** [[http://ludism.org/sandbox?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
-*** [[http://ludism.org/scwiki?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
-*** [[http://ludism.org/tinfoil?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Ludism.org]]
+*** [[http://alphagames.org/alphawiki?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Alpha Wiki]]
+*** [[http://ludism.org/funferall?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Funferall Wiki]]
+*** [[http://ludism.org/gamedesign?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Game Design Wiki]]
+*** [[http://ludism.org/gameframe?action=rss;days=30;all=0;showedit=0;full=1;diff=1][GameFrame Wiki]]
+*** [[http://ludism.org/gbgwiki?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Glass Bead Game Wiki]]
+*** [[http://ludism.org/glome?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Glome Wiki]]
+*** [[http://ludism.org/mentat?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Mentat Wiki]]
+*** [[http://ludism.org/ppwiki?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Piecepack Wiki]]
+*** [[http://ludism.org/rainbow?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Rainbow Deck Wiki]]
+*** [[http://ludism.org/sandbox?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Sandbox Wiki]]
+*** [[http://ludism.org/scwiki?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Seattle Cosmic Wiki]]
+*** [[http://ludism.org/tinfoil?action=rss;days=30;all=0;showedit=0;full=1;diff=1][Tinfoil Wiki]]
 ** misc
 *** [[http://abaghabit.tumblr.com/rss][ABAGHabit]]
 *** [[http://acantoaday.blogspot.com/feeds/posts/default?alt=rss][A Canto A Day]]
@@ -303,3 +302,4 @@
 *** [[https://www.psychologytoday.com/blog/dont-delay/feed][Don't Delay]]
 *** [[https://aeon.co/feed.rss][Aeon]]
 *** [[https://feeds.pinboard.in/rss/u:kevan/][Pinboard (kevan)]]
+*** [[https://introvertdear.com/feed/][Introvert, Dear]]
